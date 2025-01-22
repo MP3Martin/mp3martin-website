@@ -92,8 +92,7 @@ export default function Contact () {
         </MyTooltip>
       </div>
       <Divider />
-      <div className="flex flex-col max-[400px]:items-center">
-        <div className="w-min flex flex-col gap-3 max-[400px]:w-3/4 min-w-40">{links.map((link) => {
+        <div className="w-fit flex flex-col gap-3 max-[400px]:items-center max-[400px]:w-3/4 max-[400px]:mx-auto min-w-40">{links.map((link) => {
           const Icon = link.icon;
 
           return (<Button key={link.name} as={ButtonableLink}
@@ -102,12 +101,13 @@ export default function Contact () {
                           target="_blank" variant="bordered">
             <div className="w-full flex flex-row items-center">
               <Icon className="mr-1" size={iconSize} />
-              <div className="flex flex-row justify-center grow"><span className="py-[0.62rem]">{link.name}</span>
+              <div className="flex flex-row justify-center grow">
+                <span className="py-[0.62rem] mx-1">{link.name}</span>
               </div>
+              <IconExternalLink className="ml-[6px]" />
             </div>
           </Button>);
         })}</div>
-      </div>
       <Divider className="w-32 my-6" />
       <FakeForm />
     </>
