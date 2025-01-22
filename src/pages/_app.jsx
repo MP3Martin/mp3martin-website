@@ -27,7 +27,7 @@ export default function App ({
     return (
       <>
         <HeroUIProvider navigate={router.push}>
-          <NextThemesProvider forcedTheme="dark" scriptProps={{ 'data-cfasync': 'false' }}>
+          <NextThemesProvider attribute="class" forcedTheme="dark" scriptProps={{ 'data-cfasync': 'false' }}>
             <Component {...pageProps} />
           </NextThemesProvider>
         </HeroUIProvider>
