@@ -9,11 +9,13 @@ import { useEffect, useState } from 'react';
 
 import DefaultLayout from '@/layout/DefaultLayout';
 import { fontJetbrains, fontMono, fontSans } from '@/config/consts/fonts';
+import { usePreserveScroll } from '@/hooks/usePreserveScroll';
 
 export default function App ({
   Component,
   pageProps
 }) {
+  usePreserveScroll();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const router = useRouter();
 
