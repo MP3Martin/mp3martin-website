@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body, #__next, #__next > div {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+html {
+  @apply text-default-foreground
+}
+
+:target {
+  @apply scroll-mt-[3.7rem] md:scroll-mt-[3.2rem]
+}
+
+div:has(div > div > .popover-fix-z-index) {
+  z-index: 49 !important;
+}
+
+
+@layer components {
+  .text-fade {
+    background: linear-gradient(121.57deg, hsl(var(--heroui-foreground)) 18.77%, rgba(255, 255, 255, 0.66) 60.15%);
+    @apply bg-clip-text text-transparent leading-normal pb-3;
+  }
+
+  .index-section {
+    @apply max-w-full lg:max-w-[80%];
+  }
+
+  .break-word-legacy {
+    word-break: break-word;
+  }
+}
+
+@keyframes levitate {
+  0% {
+    transform: translateY(-10px)
+  }
+  100% {
+    transform: translateY(10px)
+  }
+}
