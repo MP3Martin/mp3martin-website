@@ -6,6 +6,7 @@ import PageTitle from '@/components/PageTitle';
 import Link from '@/components/Link';
 import realDivision from '@/../public/images/projects/real_division.webp';
 import gameInv from '@/../public/images/projects/GameInv.webp';
+import terminalMinesweeper from '@/../public/images/projects/terminal-minesweeper.webp';
 
 const projects = [
   {
@@ -21,6 +22,12 @@ const projects = [
     description: <>A project showcasing how you can connect <b>C# backend</b> and <b>Next.js frontend together</b>.</>,
     image: gameInv,
     link: 'https://github.com/MP3Martin/GameInv'
+  },
+  {
+    name: 'terminal-minesweeper',
+    description: <>The popular <b>game</b> written in <b>C#,</b> running <b>in the terminal</b>. (not an exact copy of the original game).</>,
+    image: terminalMinesweeper,
+    link: 'https://github.com/MP3Martin/terminal-minesweeper'
   }
 ];
 
