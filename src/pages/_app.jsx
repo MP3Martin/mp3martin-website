@@ -11,6 +11,20 @@ import DefaultLayout from '@/layout/DefaultLayout';
 import { fontJetbrains, fontMono, fontSans } from '@/config/consts/fonts';
 import { usePreserveScroll } from '@/hooks/usePreserveScroll';
 
+const Theme = ({
+  children,
+  router
+}) => {
+  return (
+    <HeroUIProvider navigate={router.push}>
+      <NextThemesProvider attribute="class" forcedTheme="dark" defaultTheme={'dark'} themes={['dark']}
+                          scriptProps={{ 'data-cfasync': 'false' }}>
+        {children}
+      </NextThemesProvider>
+    </HeroUIProvider>
+  );
+};
+
 export default function App ({
   Component,
   pageProps
@@ -26,11 +40,9 @@ export default function App ({
   if (router.pathname.endsWith('_error')) {
     return (
       <>
-        <HeroUIProvider navigate={router.push}>
-          <NextThemesProvider attribute="class" forcedTheme="dark" scriptProps={{ 'data-cfasync': 'false' }}>
-            <Component {...pageProps} />
-          </NextThemesProvider>
-        </HeroUIProvider>
+        <Theme router={router}>
+          <Component {...pageProps} />
+        </Theme>
       </>
     );
   }
@@ -40,42 +52,40 @@ export default function App ({
       <Head>
         <GoogleAnalytics gaId="G-YQNSZ8R81R" />
       </Head>
-      <HeroUIProvider navigate={router.push}>
-        <NextThemesProvider forcedTheme="dark">
-          <AnimatePresence initial>
-            <DefaultLayout>
-              <motion.div
-                key={router.route}
-                animate={{
-                  opacity: 1,
-                  scale: 1
-                }}
-                className="origin-top"
-                exit={{
+      <Theme router={router}>
+        <AnimatePresence initial>
+          <DefaultLayout>
+            <motion.div
+              key={router.route}
+              animate={{
+                opacity: 1,
+                scale: 1
+              }}
+              className="origin-top"
+              exit={{
+                opacity: 0,
+                scale: 0.4
+              }}
+              initial={isFirstLoad
+                ? {
                   opacity: 0,
-                  scale: 0.4
+                  scale: 1.05
+                }
+                : {
+                  opacity: 0,
+                  scale: 0.93
                 }}
-                initial={isFirstLoad
-                  ? {
-                      opacity: 0,
-                      scale: 1.05
-                    }
-                  : {
-                      opacity: 0,
-                      scale: 0.93
-                    }}
-                transition={{
-                  type: 'spring',
-                  bounce: 0,
-                  duration: 0.5
-                }}
-              >
-                <Component {...pageProps} />
-              </motion.div>
-            </DefaultLayout>
-          </AnimatePresence>
-        </NextThemesProvider>
-      </HeroUIProvider>
+              transition={{
+                type: 'spring',
+                bounce: 0,
+                duration: 0.5
+              }}
+            >
+              <Component {...pageProps} />
+            </motion.div>
+          </DefaultLayout>
+        </AnimatePresence>
+      </Theme>
     </>
   );
 }
