@@ -38,6 +38,7 @@ export default function App ({
   const router = useRouter();
   const motionDivRef = useRef(null);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const timeoutIdRef = useRef(null);
 
   useEffect(() => {
     const setOrigin = (y) => {
@@ -45,27 +46,39 @@ export default function App ({
         motionDivRef.current.style.transformOrigin = `center ${y}px`;
       }
     };
+
     const handleScroll = () => {
       setOrigin(window.scrollY);
     };
 
-    const cleanup = () => {
+    const startListening = () => {
+      window.addEventListener('scroll', handleScroll);
+      timeoutIdRef.current = setTimeout(() => {
+        stopListening();
+      }, 2000);
+      handleScroll();
+    };
+
+    const stopListening = () => {
       window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeoutIdRef.current);
       setOrigin(0);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
+    const handleRouteChangeComplete = () => {
+      stopListening();
+      startListening();
+    };
 
-    const timeoutId = setTimeout(() => {
-      cleanup();
-    }, 2000);
+    startListening();
+
+    router.events.on('routeChangeComplete', handleRouteChangeComplete);
 
     return () => {
-      clearTimeout(timeoutId);
-      cleanup();
+      stopListening();
+      router.events.off('routeChangeComplete', handleRouteChangeComplete);
     };
-  }, [router]);
+  }, []);
 
   useEffect(() => {
     setIsFirstLoad(false);
@@ -100,15 +113,17 @@ export default function App ({
                 opacity: 0,
                 scale: 0.4
               }}
-              initial={isFirstLoad
-                ? {
-                    opacity: 0,
-                    scale: 1.05
-                  }
-                : {
-                    opacity: 0,
-                    scale: 0.93
-                  }}
+              initial={
+                isFirstLoad
+                  ? {
+                      opacity: 0,
+                      scale: 1.05
+                    }
+                  : {
+                      opacity: 0,
+                      scale: 0.93
+                    }
+              }
               transition={{
                 type: 'spring',
                 bounce: 0,
