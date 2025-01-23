@@ -6,6 +6,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import '@/styles/globals.scss';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { useWindowScroll } from '@uidotdev/usehooks';
 
 import DefaultLayout from '@/layout/DefaultLayout';
 import { fontJetbrains, fontMono, fontSans } from '@/config/consts/fonts';
@@ -17,7 +18,8 @@ const Theme = ({
 }) => {
   return (
     <HeroUIProvider navigate={router.push}>
-      <NextThemesProvider attribute="class" defaultTheme="dark" forcedTheme="dark" scriptProps={{ 'data-cfasync': 'false' }}
+      <NextThemesProvider attribute="class" defaultTheme="dark" forcedTheme="dark"
+                          scriptProps={{ 'data-cfasync': 'false' }}
                           themes={['dark']}>
         {children}
       </NextThemesProvider>
@@ -30,6 +32,7 @@ export default function App ({
   pageProps
 }) {
   usePreserveScroll();
+  const [{ y }] = useWindowScroll();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const router = useRouter();
 
@@ -61,7 +64,6 @@ export default function App ({
                 opacity: 1,
                 scale: 1
               }}
-              className="origin-top"
               exit={{
                 opacity: 0,
                 scale: 0.4
@@ -75,6 +77,7 @@ export default function App ({
                     opacity: 0,
                     scale: 0.93
                   }}
+              style={{ transformOrigin: `center ${y}px` }}
               transition={{
                 type: 'spring',
                 bounce: 0,
