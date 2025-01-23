@@ -11,7 +11,10 @@ import DefaultLayout from '@/layout/DefaultLayout';
 import { fontJetbrains, fontMono, fontSans } from '@/config/consts/fonts';
 import { usePreserveScroll } from '@/hooks/usePreserveScroll';
 
-const Theme = ({ children, router }) => {
+const Theme = ({
+  children,
+  router
+}) => {
   return (
     <HeroUIProvider navigate={router.push}>
       <NextThemesProvider
@@ -27,28 +30,42 @@ const Theme = ({ children, router }) => {
   );
 };
 
-export default function App ({ Component, pageProps }) {
+export default function App ({
+  Component,
+  pageProps
+}) {
   usePreserveScroll();
   const router = useRouter();
   const motionDivRef = useRef(null);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const setOrigin = (y) => {
       if (motionDivRef.current) {
-        const y = window.scrollY;
-
         motionDivRef.current.style.transformOrigin = `center ${y}px`;
       }
+    };
+    const handleScroll = () => {
+      setOrigin(window.scrollY);
+    };
+
+    const cleanup = () => {
+      window.removeEventListener('scroll', handleScroll);
+      setOrigin(0);
     };
 
     window.addEventListener('scroll', handleScroll);
     handleScroll();
 
+    const timeoutId = setTimeout(() => {
+      cleanup();
+    }, 2000);
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeoutId);
+      cleanup();
     };
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     setIsFirstLoad(false);
