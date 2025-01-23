@@ -9,7 +9,8 @@ body, #__next, #__next > div {
 }
 
 html {
-  @apply text-default-foreground
+  @apply text-default-foreground;
+  overflow-anchor: none;
 }
 
 :target {
