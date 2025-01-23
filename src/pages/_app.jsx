@@ -17,8 +17,8 @@ const Theme = ({
 }) => {
   return (
     <HeroUIProvider navigate={router.push}>
-      <NextThemesProvider attribute="class" forcedTheme="dark" defaultTheme={'dark'} themes={['dark']}
-                          scriptProps={{ 'data-cfasync': 'false' }}>
+      <NextThemesProvider attribute="class" defaultTheme="dark" forcedTheme="dark" scriptProps={{ 'data-cfasync': 'false' }}
+                          themes={['dark']}>
         {children}
       </NextThemesProvider>
     </HeroUIProvider>
@@ -68,13 +68,13 @@ export default function App ({
               }}
               initial={isFirstLoad
                 ? {
-                  opacity: 0,
-                  scale: 1.05
-                }
+                    opacity: 0,
+                    scale: 1.05
+                  }
                 : {
-                  opacity: 0,
-                  scale: 0.93
-                }}
+                    opacity: 0,
+                    scale: 0.93
+                  }}
               transition={{
                 type: 'spring',
                 bounce: 0,
