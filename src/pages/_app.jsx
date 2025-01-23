@@ -5,8 +5,7 @@ import Head from 'next/head';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import '@/styles/globals.scss';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { useWindowScroll } from '@uidotdev/usehooks';
+import { useEffect, useRef, useState } from 'react';
 
 import DefaultLayout from '@/layout/DefaultLayout';
 import { fontJetbrains, fontMono, fontSans } from '@/config/consts/fonts';
@@ -18,9 +17,13 @@ const Theme = ({
 }) => {
   return (
     <HeroUIProvider navigate={router.push}>
-      <NextThemesProvider attribute="class" defaultTheme="dark" forcedTheme="dark"
-                          scriptProps={{ 'data-cfasync': 'false' }}
-                          themes={['dark']}>
+      <NextThemesProvider
+        attribute="class"
+        defaultTheme="dark"
+        forcedTheme="dark"
+        scriptProps={{ 'data-cfasync': 'false' }}
+        themes={['dark']}
+      >
         {children}
       </NextThemesProvider>
     </HeroUIProvider>
@@ -32,9 +35,50 @@ export default function App ({
   pageProps
 }) {
   usePreserveScroll();
-  const [{ y }] = useWindowScroll();
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const router = useRouter();
+  const motionDivRef = useRef(null);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const timeoutIdRef = useRef(null);
+
+  useEffect(() => {
+    const setOrigin = (y) => {
+      if (motionDivRef.current) {
+        motionDivRef.current.style.transformOrigin = `center ${y}px`;
+      }
+    };
+
+    const handleScroll = () => {
+      setOrigin(window.scrollY);
+    };
+
+    const startListening = () => {
+      window.addEventListener('scroll', handleScroll);
+      timeoutIdRef.current = setTimeout(() => {
+        stopListening();
+      }, 2000);
+      handleScroll();
+    };
+
+    const stopListening = () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeoutIdRef.current);
+      setOrigin(0);
+    };
+
+    const handleRouteChangeComplete = () => {
+      stopListening();
+      startListening();
+    };
+
+    startListening();
+
+    router.events.on('routeChangeComplete', handleRouteChangeComplete);
+
+    return () => {
+      stopListening();
+      router.events.off('routeChangeComplete', handleRouteChangeComplete);
+    };
+  }, []);
 
   useEffect(() => {
     setIsFirstLoad(false);
@@ -60,6 +104,7 @@ export default function App ({
           <DefaultLayout>
             <motion.div
               key={router.route}
+              ref={motionDivRef}
               animate={{
                 opacity: 1,
                 scale: 1
@@ -68,16 +113,17 @@ export default function App ({
                 opacity: 0,
                 scale: 0.4
               }}
-              initial={isFirstLoad
-                ? {
-                    opacity: 0,
-                    scale: 1.05
-                  }
-                : {
-                    opacity: 0,
-                    scale: 0.93
-                  }}
-              style={{ transformOrigin: `center ${y}px` }}
+              initial={
+                isFirstLoad
+                  ? {
+                      opacity: 0,
+                      scale: 1.05
+                    }
+                  : {
+                      opacity: 0,
+                      scale: 0.93
+                    }
+              }
               transition={{
                 type: 'spring',
                 bounce: 0,
