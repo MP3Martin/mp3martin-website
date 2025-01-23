@@ -1,9 +1,9 @@
 import {
+  Button,
   Navbar as HeroUINavbar,
   NavbarBrand as HeroUINavbarBrand,
   NavbarContent,
   NavbarMenu
-  , Button
 } from '@heroui/react';
 import NextLink from 'next/link';
 import React, { useState } from 'react';
@@ -20,9 +20,9 @@ export const iconSize = 35;
 const NavbarBrand = () => {
   return <HeroUINavbarBrand className="gap-3 max-w-fit">
     <NextLink className="flex justify-start items-center gap-1" href="/">
-      <Image alt='MP3Martin logo' className="rounded-lg" height={iconSize}
+      <Image alt="MP3Martin logo" className="rounded-lg" height={iconSize}
              src={siteConfig.basePath + '/images/favicon.png'} width={iconSize} />
-      <p className='font-bold'>MP3Martin</p>
+      <p className="font-bold">MP3Martin</p>
     </NextLink>
   </HeroUINavbarBrand>;
 };
@@ -42,13 +42,17 @@ export default function NavBar () {
   }
 
   return (
-    <HeroUINavbar isBordered className='backdrop-blur-[6px] bg-background/45' classNames={{ wrapper: 'max-sm:gap-0' }}
+    <HeroUINavbar isBordered className="backdrop-blur-[6px] bg-background/45" classNames={{ wrapper: 'max-sm:gap-0' }}
                   height={isMobile ? '3.7rem' : '3.2rem'}
                   isMenuOpen={isMenuOpen} maxWidth="full" position="sticky" onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent className="max-sm:-ml-2" justify="start">
         <Button isIconOnly className="sm:hidden hover:scale-110"
                 data-open={isMenuOpen} size="md"
-                style={{ width: iconSize + 10, height: iconSize + 10, marginRight: '-5px' }} variant="light" onPress={toggleMenu}
+                style={{
+                  width: iconSize + 10,
+                  height: iconSize + 10,
+                  marginRight: '-5px'
+                }} variant="light" onPress={toggleMenu}
         >
           <ToggleIcon />
         </Button>
@@ -71,8 +75,8 @@ export default function NavBar () {
         {(windowSize.width < 360) ? <MobileNavbarButtons iconSize={iconSize} /> : <NavbarButtons iconSize={iconSize} />}
       </NavbarContent>
       {isMobile &&
-        <NavbarMenu>
-          <div className="h-1" />
+        <NavbarMenu className="pt-0">
+          <div className="h-3" />
           <NavbarTabs mobile closeMenu={() => toggleMenu(false)} />
         </NavbarMenu>
       }
