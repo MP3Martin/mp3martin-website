@@ -5,36 +5,50 @@ import Head from 'next/head';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import '@/styles/globals.scss';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { useWindowScroll } from '@uidotdev/usehooks';
+import { useEffect, useRef, useState } from 'react';
 
 import DefaultLayout from '@/layout/DefaultLayout';
 import { fontJetbrains, fontMono, fontSans } from '@/config/consts/fonts';
 import { usePreserveScroll } from '@/hooks/usePreserveScroll';
 
-const Theme = ({
-  children,
-  router
-}) => {
+const Theme = ({ children, router }) => {
   return (
     <HeroUIProvider navigate={router.push}>
-      <NextThemesProvider attribute="class" defaultTheme="dark" forcedTheme="dark"
-                          scriptProps={{ 'data-cfasync': 'false' }}
-                          themes={['dark']}>
+      <NextThemesProvider
+        attribute="class"
+        defaultTheme="dark"
+        forcedTheme="dark"
+        scriptProps={{ 'data-cfasync': 'false' }}
+        themes={['dark']}
+      >
         {children}
       </NextThemesProvider>
     </HeroUIProvider>
   );
 };
 
-export default function App ({
-  Component,
-  pageProps
-}) {
+export default function App ({ Component, pageProps }) {
   usePreserveScroll();
-  const [{ y }] = useWindowScroll();
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const router = useRouter();
+  const motionDivRef = useRef(null);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (motionDivRef.current) {
+        const y = window.scrollY;
+
+        motionDivRef.current.style.transformOrigin = `center ${y}px`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     setIsFirstLoad(false);
@@ -60,6 +74,7 @@ export default function App ({
           <DefaultLayout>
             <motion.div
               key={router.route}
+              ref={motionDivRef}
               animate={{
                 opacity: 1,
                 scale: 1
@@ -77,7 +92,6 @@ export default function App ({
                     opacity: 0,
                     scale: 0.93
                   }}
-              style={{ transformOrigin: `center ${y}px` }}
               transition={{
                 type: 'spring',
                 bounce: 0,
