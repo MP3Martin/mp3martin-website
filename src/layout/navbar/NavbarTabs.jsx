@@ -75,7 +75,7 @@ export default function NavbarTabs ({
         cursor: 'bg-primary/60 border-1 border-foreground/35',
         wrapper: clsx(mobile && 'w-full min-[400px]:w-2/3 min-[500px]:w-1/2'),
         tabContent: clsx(mobile && 'text-lg')
-      }} isVertical={mobile} items={pages}
+      }} isVertical={mobile} items={pages} color={'primary'}
             selectedKey={selected}
             size="lg" variant="light" onSelectionChange={(k) => selectionChanged(k)}>
         {/**
