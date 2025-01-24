@@ -31,7 +31,30 @@ const projects = [
   }
 ];
 
+const checkOutVariations = [
+  'Check Out',
+  'Go See',
+  'See More',
+  'Learn More',
+  'Take A Look',
+  'Dive In',
+  'Look Now',
+  'Try Now',
+  'See Details',
+  'Go Explore',
+  'View More',
+  'Find Out'
+];
+
+const pickRandom = (arr, n) => {
+  const shuffled = arr.sort(() => Math.random() - 0.5);
+
+  return Array.from({ length: n }, (_, i) => shuffled[i % shuffled.length]);
+};
+
 export default function Projects () {
+  const randomVariations = pickRandom(checkOutVariations, projects.length);
+
   return (
     <>
       <PageInfo description="Projects made by me" title="Projects - MP3Martin" />
@@ -43,9 +66,15 @@ export default function Projects () {
       </p>
       <div className="flex flex-row flex-wrap justify-center gap-5">
         {
-          projects.map((project) => (
-            <ProjectCard key={project.name} description={project.description} image={project.image}
-                         link={project.link} name={project.name} />
+          projects.map((project, index) => (
+            <ProjectCard
+              key={project.name}
+              checkOutVariation={randomVariations[index]}
+              description={project.description}
+              image={project.image}
+              link={project.link}
+              name={project.name}
+            />
           ))
         }
       </div>

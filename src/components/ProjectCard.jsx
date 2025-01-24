@@ -4,26 +4,12 @@ import { Button, Card, CardBody, CardFooter, CardHeader, Image } from '@heroui/r
 import ButtonableLink from '@/components/ButtonableLink';
 import Link from '@/components/Link';
 
-const checkOutVariations = [
-  'Check Out',
-  'Go See',
-  'See More',
-  'Learn More',
-  'Take A Look',
-  'Dive In',
-  'Look Now',
-  'Try Now',
-  'See Details',
-  'Go Explore',
-  'View More',
-  'Find Out'
-];
-
 export default function ProjectCard ({
   name,
   description,
   image,
-  link
+  link,
+  checkOutVariation
 }) {
   return (
     <>
@@ -60,7 +46,7 @@ export default function ProjectCard ({
             variant="flat"
           >
             <span
-              suppressHydrationWarning>{checkOutVariations[Math.floor(Math.random() * checkOutVariations.length)]}</span>
+              suppressHydrationWarning>{checkOutVariation}</span>
           </Button>
         </CardFooter>
       </Card>
