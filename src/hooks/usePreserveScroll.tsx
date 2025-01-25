@@ -9,6 +9,9 @@ export const usePreserveScroll = () => {
   const scrollPositions = useRef<{ [url: string]: number }>({});
 
   useEffect(() => {
+    // Disable normal browser scroll restoration behavior
+    window.history.scrollRestoration = 'manual';
+
     const onRouteChangeStart = () => {
       const url = router.pathname;
 
