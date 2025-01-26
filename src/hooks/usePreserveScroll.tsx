@@ -1,27 +1,33 @@
+// TODO: store scroll position before reload / periodically
+
 /* Original code thanks to Jak-Ch-ll @ https://gist.github.com/Jak-Ch-ll/12d3ac96c1562e85c508dd40d309be45 */
 
 import { useRouter } from 'next/router';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 export const usePreserveScroll = () => {
   const router = useRouter();
 
-  const scrollPositions = useRef<{ [url: string]: number }>({});
-
+  const storeScrollPosition = () => {
+    const url = router.pathname;
+    window.sessionStorage.setItem(`scrollPosition:${url}`, window.scrollY.toString());
+  };
   useEffect(() => {
     // Disable normal browser scroll restoration behavior
     window.history.scrollRestoration = 'manual';
 
     const onRouteChangeStart = () => {
-      const url = router.pathname;
-
-      scrollPositions.current[url] = window.scrollY;
+      storeScrollPosition();
     };
 
-    const onRouteChangeComplete = (url: any) => {
-      if (scrollPositions.current[url]) {
+    const onRouteChangeComplete = (url: string) => {
+      const storedScrollPosition = window.sessionStorage.getItem(`scrollPosition:${url}`);
+
+      if (storedScrollPosition) {
+        const scrollPosition = parseInt(storedScrollPosition, 10);
+
         window.scroll({
-          top: scrollPositions.current[url],
+          top: scrollPosition,
           behavior: 'instant'
         });
       }
