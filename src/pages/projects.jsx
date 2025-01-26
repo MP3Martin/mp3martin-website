@@ -7,6 +7,8 @@ import Link from '@/components/Link';
 import realDivision from '@/../public/images/projects/real_division.webp';
 import gameInv from '@/../public/images/projects/GameInv.webp';
 import terminalMinesweeper from '@/../public/images/projects/terminal-minesweeper.webp';
+import routerWebLed from '@/../public/images/projects/router-web-led.webp';
+import biggerHotbarMcPlugin from '@/../public/images/projects/BiggerHotbar-MC-Plugin.webp';
 
 const projects = [
   {
@@ -28,6 +30,18 @@ const projects = [
     description: <>The popular <b>game</b> written in <b>C#,</b> running <b>in the terminal</b>. (not an exact copy of the original game).</>,
     image: terminalMinesweeper,
     link: 'https://github.com/MP3Martin/terminal-minesweeper'
+  },
+  {
+    name: 'router-web-led',
+    description: <>Control your <b>router LEDs</b> from a cool <b>command line TUI</b>.</>,
+    image: routerWebLed,
+    link: 'https://github.com/MP3Martin/router-web-led'
+  },
+  {
+    name: 'BiggerHotbar-MC-Plugin',
+    description: <>Minecraft Java Edition Spigot plugin that makes your hotbar bigger (using scrolling)</>,
+    image: biggerHotbarMcPlugin,
+    link: 'https://github.com/MP3Martin/BiggerHotbar-MC-Plugin'
   }
 ];
 
