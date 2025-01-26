@@ -5,32 +5,55 @@ import { useEffect, useRef } from 'react';
 
 export const usePreserveScroll = () => {
   const router = useRouter();
+  const isFirstRender = useRef(true);
 
-  const scrollPositions = useRef<{ [url: string]: number }>({});
+  const storeScrollPosition = () => {
+    const url = router.pathname;
+
+    window.sessionStorage.setItem(`scrollPosition:${url}`, window.scrollY.toString());
+  };
+
+  const restoreScrollPosition = (url: string) => {
+    const storedScrollPosition = window.sessionStorage.getItem(`scrollPosition:${url}`);
+
+    if (storedScrollPosition) {
+      const scrollPosition = parseInt(storedScrollPosition, 10);
+
+      window.scroll({
+        top: scrollPosition,
+        behavior: 'instant'
+      });
+    }
+  };
 
   useEffect(() => {
     // Disable normal browser scroll restoration behavior
     window.history.scrollRestoration = 'manual';
 
+    // Restore scroll position on page reload
+    if (isFirstRender) {
+      restoreScrollPosition(router.pathname);
+    }
+
     const onRouteChangeStart = () => {
-      const url = router.pathname;
-
-      scrollPositions.current[url] = window.scrollY;
+      storeScrollPosition();
+    };
+    const onBeforeUnload = () => {
+      storeScrollPosition();
     };
 
-    const onRouteChangeComplete = (url: any) => {
-      if (scrollPositions.current[url]) {
-        window.scroll({
-          top: scrollPositions.current[url],
-          behavior: 'instant'
-        });
-      }
+    const onRouteChangeComplete = (url: string) => {
+      restoreScrollPosition(url);
     };
 
+    window.addEventListener('beforeunload', onBeforeUnload);
     router.events.on('routeChangeStart', onRouteChangeStart);
     router.events.on('routeChangeComplete', onRouteChangeComplete);
 
+    isFirstRender.current = false;
+
     return () => {
+      window.removeEventListener('beforeunload', onBeforeUnload);
       router.events.off('routeChangeStart', onRouteChangeStart);
       router.events.off('routeChangeComplete', onRouteChangeComplete);
     };
