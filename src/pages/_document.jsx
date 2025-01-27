@@ -6,7 +6,9 @@ import { fontJetbrains, fontMono, fontSans } from '@/config/consts/fonts';
 export default function Document () {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        {/* <script src="https://unpkg.com/react-scan/dist/auto.global.js" /> */}
+      </Head>
       <body
         className={clsx(
           'min-h-screen bg-background font-sans antialiased flex-grow',

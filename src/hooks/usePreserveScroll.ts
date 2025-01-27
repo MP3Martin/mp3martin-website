@@ -31,7 +31,7 @@ export const usePreserveScroll = () => {
     window.history.scrollRestoration = 'manual';
 
     // Restore scroll position on page reload
-    if (isFirstRender) {
+    if (isFirstRender.current) {
       restoreScrollPosition(router.pathname);
     }
 
