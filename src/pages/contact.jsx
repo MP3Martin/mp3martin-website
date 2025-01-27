@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Divider as HeroUIDivider, Snippet } from '@heroui/react';
 import {
   IconBrandDiscord,
@@ -12,12 +12,15 @@ import {
   IconExternalLink,
   IconMailFilled
 } from '@tabler/icons-react';
+import { primaryInput } from 'detect-it';
+import clsx from 'clsx';
 
 import PageTitle from '@/components/PageTitle';
 import PageInfo from '@/components/PageInfo';
 import MyTooltip from '@/components/MyTooltip';
 import FakeForm from '@/components/contact/FakeForm';
 import ButtonableLink from '@/components/ButtonableLink';
+import ButtonScaleEffect from '@/components/contact/ButtonScaleEffect';
 
 const links = [
   {
@@ -52,10 +55,18 @@ const iconSize = 30;
 const Divider = () => <HeroUIDivider className="w-32 my-6 bg-gray-500" />;
 
 export default function Contact () {
+  const [isTouch, setIsTouch] = useState(true);
+
+  useEffect(() => {
+    setIsTouch(primaryInput === 'touch');
+  }, []);
+
   return (
     <>
       <PageInfo description="How to contact me" title="Contact - MP3Martin" />
       <PageTitle>Contact</PageTitle>
+      {!isTouch && <ButtonScaleEffect />}
+
       <p className="text-lg mb-4">
         Here, you can find links to my social media and ways to contact me.
       </p>
@@ -92,11 +103,13 @@ export default function Contact () {
         </MyTooltip>
       </div>
       <Divider />
-        <div className="w-fit flex flex-col gap-3 max-[400px]:items-center max-[400px]:w-3/4 max-[400px]:mx-auto min-w-40">{links.map((link) => {
+      <div
+        className="button-container w-fit flex flex-col gap-3 max-[400px]:items-center max-[400px]:w-3/4 max-[400px]:mx-auto min-w-40">
+        {links.map((link) => {
           const Icon = link.icon;
 
           return (<Button key={link.name} as={ButtonableLink}
-                          className="border-amber-600 hover:scale-105 transition-transform text-medium pl-2 pr-3 h-fit text-default-foreground w-full"
+                          className={clsx('border-amber-600 text-medium pl-2 pr-3 h-fit text-default-foreground w-full', isTouch ? 'hover:scale-105 transition-transform' : 'scale-button')}
                           href={link.link}
                           target="_blank" variant="bordered">
             <div className="w-full flex flex-row items-center">
@@ -107,7 +120,8 @@ export default function Contact () {
               <IconExternalLink className="ml-[6px]" />
             </div>
           </Button>);
-        })}</div>
+        })}
+      </div>
       <Divider className="w-32 my-6" />
       <FakeForm />
     </>

@@ -18,7 +18,7 @@ export default function CrowModal ({
             <ModalBody>
               <Image
                 alt="Crow"
-                className="shadow-md rounded-xl w-full h-[initial_!important]"
+                className="shadow-md rounded-xl w-full !h-[initial]"
                 draggable={false}
                 fetchpriority="low"
                 src={crow.src}

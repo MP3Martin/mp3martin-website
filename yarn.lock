@@ -5121,6 +5121,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"detect-it@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "detect-it@npm:4.0.1"
+  checksum: 10c0/9633dcafaa28dfd61b5e8f2925ec5cd09fda19d99ff7ea062e22d7cc8b3a8dfccf5c5118b6e72940f15d8371bd5d696ea66cc0972d1a6cbee918d4b06448c359
+  languageName: node
+  linkType: hard
+
 "detect-libc@npm:^1.0.3":
   version: 1.0.3
   resolution: "detect-libc@npm:1.0.3"
@@ -7010,6 +7017,7 @@ __metadata:
     "@uidotdev/usehooks": "npm:^2.4.1"
     autoprefixer: "npm:^10.4.20"
     clsx: "npm:^2.1.1"
+    detect-it: "npm:^4.0.1"
     eslint: "npm:^8.57.1"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-config-semistandard: "npm:^17.0.0"

@@ -39,7 +39,7 @@ const projects = [
   },
   {
     name: 'BiggerHotbar-MC-Plugin',
-    description: <>Minecraft Java Edition Spigot plugin that makes your hotbar bigger (using scrolling)</>,
+    description: <>Minecraft Java Edition Spigot plugin that makes your hotbar bigger (using scrolling).</>,
     image: biggerHotbarMcPlugin,
     link: 'https://github.com/MP3Martin/BiggerHotbar-MC-Plugin'
   }

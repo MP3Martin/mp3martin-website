@@ -23,7 +23,7 @@ export default function ProjectCard ({
         <CardBody className="overflow-visible pt-2 pb-1.5 self-end">
           <Image
             alt={`Image of project called "${name}"`}
-            className="object-cover shadow-md rounded-xl aspect-[3/4] w-full h-[initial_!important]"
+            className="object-cover shadow-md rounded-xl aspect-[3/4] w-full !h-[initial]"
             draggable={false}
             fetchpriority="low"
             src={image.src}
@@ -35,7 +35,7 @@ export default function ProjectCard ({
           -translate-x-1/2 flex flex-row justify-center shadow-md z-10 has-[>a[data-pressed=true]]:scale-[98%]">
           <Button
             as={ButtonableLink}
-            className="text-base text-white bg-gray-800/10 h-9 scale-[100%_!important] data-[focus-visible=true]:-outline-offset-2"
+            className="text-base text-white bg-gray-800/10 h-9 !scale-[100%] data-[focus-visible=true]:-outline-offset-2"
             color="default"
             endContent={<IconExternalLink size={25} />}
             href={link}

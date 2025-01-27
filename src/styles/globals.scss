@@ -45,3 +45,8 @@ div:has(div > div > .popover-fix-z-index) {
     transform: translateY(10px)
   }
 }
+
+.scale-button {
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}

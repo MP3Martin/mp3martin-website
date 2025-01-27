@@ -28,7 +28,7 @@ export default function SkillIcons ({
 
       return (
         <MyTooltip key={index} content={tooltip} placement="bottom">
-          <Button isIconOnly as={ButtonableLink} className="size-[initial_!important] hover:scale-110" href={link}
+          <Button isIconOnly as={ButtonableLink} className="!size-[initial] hover:scale-110" href={link}
                   size="lg"
                   target="_blank">
             <Card className="aspect-square w-fit" classNames={{ body: 'p-2' }}>
