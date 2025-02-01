@@ -6,7 +6,7 @@ import {
   NavbarMenu
 } from '@heroui/react';
 import NextLink from 'next/link';
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import Image from 'next/image';
 
 import { useWindowSize } from '@/hooks/useWindowSize';
@@ -18,19 +18,20 @@ import NavbarTabs from '@/layout/navbar/NavbarTabs';
 export const iconSize = 35;
 
 const NavbarBrand = () => {
-  return <HeroUINavbarBrand className="gap-3 max-w-fit">
+  return (<HeroUINavbarBrand className="gap-3 max-w-fit">
     <NextLink className="flex justify-start items-center gap-1" href="/">
       <Image alt="MP3Martin logo" className="rounded-lg" height={iconSize}
              src={siteConfig.basePath + '/images/favicon.png'} width={iconSize} />
       <p className="font-bold">MP3Martin</p>
     </NextLink>
-  </HeroUINavbarBrand>;
+  </HeroUINavbarBrand>);
 };
 
-export default function NavBar () {
-  const windowSize = useWindowSize();
+const NavBarImpl = memo(({
+  isMobile,
+  showMobileNavbarButtons
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isMobile = ['xxs', 'xs'].includes(windowSize.breakpoint);
 
   function toggleMenu (state) {
     if (typeof state === 'boolean') {
@@ -72,7 +73,7 @@ export default function NavBar () {
         className="flex gap-2 max-sm:-mr-3"
         justify="end"
       >
-        {(windowSize.width < 360) ? <MobileNavbarButtons iconSize={iconSize} /> : <NavbarButtons iconSize={iconSize} />}
+        {showMobileNavbarButtons ? <MobileNavbarButtons iconSize={iconSize} /> : <NavbarButtons iconSize={iconSize} />}
       </NavbarContent>
       {isMobile &&
         <NavbarMenu className="pt-0">
@@ -81,5 +82,17 @@ export default function NavBar () {
         </NavbarMenu>
       }
     </HeroUINavbar>
+  );
+});
+
+NavBarImpl.displayName = 'NavBarImpl';
+
+export default function NavBar () {
+  const windowSize = useWindowSize();
+  const isMobile = ['xxs', 'xs'].includes(windowSize.breakpoint);
+  const showMobileNavbarButtons = windowSize.width < 360;
+
+  return (
+    <NavBarImpl isMobile={isMobile} showMobileNavbarButtons={showMobileNavbarButtons} />
   );
 }
