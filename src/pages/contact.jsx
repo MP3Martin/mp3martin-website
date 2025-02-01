@@ -18,7 +18,7 @@ import clsx from 'clsx';
 import PageTitle from '@/components/PageTitle';
 import PageInfo from '@/components/PageInfo';
 import MyTooltip from '@/components/MyTooltip';
-import FakeForm from '@/components/contact/FakeForm';
+import EasterEgg from '@/components/contact/EasterEgg';
 import ButtonableLink from '@/components/ButtonableLink';
 import ButtonScaleEffect from '@/components/contact/ButtonScaleEffect';
 
@@ -122,8 +122,7 @@ export default function Contact () {
           </Button>);
         })}
       </div>
-      <Divider className="w-32 my-6" />
-      <FakeForm />
+      <EasterEgg className="mt-1"/>
     </>
   );
 }
