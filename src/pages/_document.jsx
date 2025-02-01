@@ -11,7 +11,7 @@ export default function Document () {
       </Head>
       <body
         className={clsx(
-          'min-h-screen bg-background font-sans antialiased flex-grow',
+          'min-h-screen bg-background font-sans antialiased flex-grow relative z-0',
           fontSans.variable,
           fontMono.variable,
           fontJetbrains.variable

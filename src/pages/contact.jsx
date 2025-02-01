@@ -52,7 +52,7 @@ const links = [
 
 const iconSize = 30;
 
-const Divider = () => <HeroUIDivider className="w-32 my-6 bg-gray-500" />;
+const Divider = () => <HeroUIDivider className="w-32 my-6 bg-gray-500 max-[400px]:mx-auto" />;
 
 export default function Contact () {
   const [isTouch, setIsTouch] = useState(true);
@@ -67,7 +67,7 @@ export default function Contact () {
       <PageTitle>Contact</PageTitle>
       {!isTouch && <ButtonScaleEffect />}
 
-      <p className="text-lg mb-4">
+      <p className="text-lg mb-4 max-w-96">
         Here, you can find links to my social media and ways to contact me.
       </p>
       <div className="flex flex-col w-fit">
@@ -109,7 +109,7 @@ export default function Contact () {
           const Icon = link.icon;
 
           return (<Button key={link.name} as={ButtonableLink}
-                          className={clsx('border-amber-600 text-medium pl-2 pr-3 h-fit text-default-foreground w-full', isTouch ? 'hover:scale-105 transition-transform' : 'scale-button')}
+                          className={clsx('border-[#DD6600] text-medium pl-2 pr-3 h-fit text-default-foreground w-full', isTouch ? 'hover:scale-105 transition-transform' : 'scale-button')}
                           href={link.link}
                           target="_blank" variant="bordered">
             <div className="w-full flex flex-row items-center">
