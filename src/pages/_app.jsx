@@ -122,13 +122,13 @@ export default function App ({
               initial={
                 isFirstLoad
                   ? {
-                    opacity: 0,
-                    scale: 1.05
-                  }
+                      opacity: 0,
+                      scale: 1.05
+                    }
                   : {
-                    opacity: 0,
-                    scale: 0.93
-                  }
+                      opacity: 0,
+                      scale: 0.93
+                    }
               }
               transition={{
                 type: 'spring',
