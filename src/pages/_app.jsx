@@ -12,7 +12,9 @@ import DefaultLayout from '@/layout/DefaultLayout';
 import { fontJetbrains, fontMono, fontSans } from '@/config/consts/fonts';
 import { usePreserveScroll } from '@/hooks/usePreserveScroll';
 
-const DynamicParticlesSidebar = dynamic(() => import('../components/ParticlesSidebar'));
+const DynamicParticlesSidebar = dynamic(() => import('../components/ParticlesSidebar'), {
+  ssr: false
+});
 
 const Theme = ({
   children,
@@ -120,13 +122,13 @@ export default function App ({
               initial={
                 isFirstLoad
                   ? {
-                      opacity: 0,
-                      scale: 1.05
-                    }
+                    opacity: 0,
+                    scale: 1.05
+                  }
                   : {
-                      opacity: 0,
-                      scale: 0.93
-                    }
+                    opacity: 0,
+                    scale: 0.93
+                  }
               }
               transition={{
                 type: 'spring',
