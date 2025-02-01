@@ -5,11 +5,14 @@ import Head from 'next/head';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import '@/styles/globals.scss';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
 
 import DefaultLayout from '@/layout/DefaultLayout';
 import { fontJetbrains, fontMono, fontSans } from '@/config/consts/fonts';
 import { usePreserveScroll } from '@/hooks/usePreserveScroll';
+
+const DynamicParticlesSidebar = dynamic(() => import('../components/ParticlesSidebar'));
 
 const Theme = ({
   children,
@@ -102,6 +105,7 @@ export default function App ({
       <Theme router={router}>
         <AnimatePresence initial>
           <DefaultLayout>
+            <DynamicParticlesSidebar />
             <motion.div
               key={router.route}
               ref={motionDivRef}

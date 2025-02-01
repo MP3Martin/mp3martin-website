@@ -27,7 +27,8 @@ const projects = [
   },
   {
     name: 'terminal-minesweeper',
-    description: <>The popular <b>game</b> written in <b>C#,</b> running <b>in the terminal</b>. (not an exact copy of the original game).</>,
+    description: <>The popular <b>game</b> written in <b>C#,</b> running <b>in the terminal</b>. (not an exact copy of
+      the original game).</>,
     image: terminalMinesweeper,
     link: 'https://github.com/MP3Martin/terminal-minesweeper'
   },
@@ -75,8 +76,7 @@ export default function Projects () {
       <PageTitle>Projects</PageTitle>
       <p className="text-lg mb-4">
         This is a list of my favourite project made by me. See more on my&nbsp;
-        <Link isExternal className="text-[length:inherit]"
-              href="https://github.com/MP3Martin?tab=repositories">GitHub</Link>.
+        <Link isExternal href="https://github.com/MP3Martin?tab=repositories">GitHub</Link>.
       </p>
       <div className="flex flex-row flex-wrap justify-center gap-5">
         {
