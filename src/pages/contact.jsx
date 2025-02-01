@@ -52,7 +52,7 @@ const links = [
 
 const iconSize = 30;
 
-const Divider = () => <HeroUIDivider className="w-32 my-6 bg-gray-500" />;
+const Divider = () => <HeroUIDivider className="w-32 my-6 bg-gray-500 max-[400px]:mx-auto" />;
 
 export default function Contact () {
   const [isTouch, setIsTouch] = useState(true);
