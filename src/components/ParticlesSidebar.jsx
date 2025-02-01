@@ -33,7 +33,7 @@ const MyParticles = () => {
           opacity: {
             value: {
               min: 0.1,
-              max: 0.7246947617172113
+              max: 0.7
             },
             animation: {
               enable: false,
