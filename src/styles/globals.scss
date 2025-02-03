@@ -13,6 +13,13 @@ html {
   overflow-anchor: none;
 }
 
+// Prevent layout shift on webkit/blink-based browsers because of scrollbar
+@supports (not (-moz-appearance:button)) and (contain:paint) and (-webkit-appearance:none) {
+  html {
+    overflow-y: scroll;
+  }
+}
+
 :target {
   @apply scroll-mt-[3.7rem] md:scroll-mt-[3.2rem]
 }

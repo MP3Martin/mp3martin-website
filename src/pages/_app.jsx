@@ -4,13 +4,16 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import '@/styles/globals.scss';
-import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import React, { useCallback, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 
 import DefaultLayout from '@/layout/DefaultLayout';
 import { fontJetbrains, fontMono, fontSans } from '@/config/consts/fonts';
 import { usePreserveScroll } from '@/hooks/usePreserveScroll';
+import { useHandleScrollOrigin } from '@/hooks/useHandleScrollOrigin';
+import PageFadeInAnimationWrapper from '@/layout/PageFadeInAnimationWrapper';
+import LoadingScreen from '@/layout/LoadingScreen';
 
 const DynamicParticlesSidebar = dynamic(() => import('../components/ParticlesSidebar'), {
   ssr: false
@@ -42,52 +45,13 @@ export default function App ({
   usePreserveScroll();
   const router = useRouter();
   const motionDivRef = useRef(null);
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
-  const timeoutIdRef = useRef(null);
+  const [startFadeIn, setStartFadeIn] = useState(false);
 
-  useEffect(() => {
-    const setOrigin = (y) => {
-      if (motionDivRef.current) {
-        motionDivRef.current.style.transformOrigin = `center ${y}px`;
-      }
-    };
+  useHandleScrollOrigin(motionDivRef, router);
 
-    const handleScroll = () => {
-      setOrigin(window.scrollY);
-    };
-
-    const startListening = () => {
-      window.addEventListener('scroll', handleScroll);
-      timeoutIdRef.current = setTimeout(() => {
-        stopListening();
-      }, 2000);
-      handleScroll();
-    };
-
-    const stopListening = () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(timeoutIdRef.current);
-      setOrigin(0);
-    };
-
-    const handleRouteChangeComplete = () => {
-      stopListening();
-      startListening();
-    };
-
-    startListening();
-
-    router.events.on('routeChangeComplete', handleRouteChangeComplete);
-
-    return () => {
-      stopListening();
-      router.events.off('routeChangeComplete', handleRouteChangeComplete);
-    };
-  }, []);
-
-  useEffect(() => {
-    setIsFirstLoad(false);
-  }, []);
+  const loadingScreenFinished = useCallback(() => {
+    setStartFadeIn(true);
+  }, [setStartFadeIn]);
 
   if (router.pathname.endsWith('_error')) {
     return (
@@ -108,36 +72,10 @@ export default function App ({
         <AnimatePresence initial>
           <DefaultLayout>
             <DynamicParticlesSidebar />
-            <motion.div
-              key={router.route}
-              ref={motionDivRef}
-              animate={{
-                opacity: 1,
-                scale: 1
-              }}
-              exit={{
-                opacity: 0,
-                scale: 0.4
-              }}
-              initial={
-                isFirstLoad
-                  ? {
-                      opacity: 0,
-                      scale: 1.05
-                    }
-                  : {
-                      opacity: 0,
-                      scale: 0.93
-                    }
-              }
-              transition={{
-                type: 'spring',
-                bounce: 0,
-                duration: 0.5
-              }}
-            >
+<LoadingScreen loadingScreenFinished={loadingScreenFinished} />
+            <PageFadeInAnimationWrapper motionDivRef={motionDivRef} router={router} startFadeIn={startFadeIn}>
               <Component {...pageProps} />
-            </motion.div>
+            </PageFadeInAnimationWrapper>
           </DefaultLayout>
         </AnimatePresence>
       </Theme>
