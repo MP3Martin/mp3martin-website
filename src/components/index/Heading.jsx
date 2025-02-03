@@ -72,7 +72,7 @@ export default function Heading () {
               }}
               transition={{
                 delay: 0.1,
-                duration: 2,
+                duration: 2.4,
                 type: 'tween',
                 ease: cubicBezier(0.130, 0.250, 0.015, 0.990)
               }}
