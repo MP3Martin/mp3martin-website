@@ -13,7 +13,7 @@ import { fontJetbrains, fontMono, fontSans } from '@/config/consts/fonts';
 import { usePreserveScroll } from '@/hooks/usePreserveScroll';
 import { useHandleScrollOrigin } from '@/hooks/useHandleScrollOrigin';
 import PageFadeInAnimationWrapper from '@/layout/PageFadeInAnimationWrapper';
-import LoadingScreen from '@/layout/LoadingScreen';
+import LoadingScreen from '@/layout/LoadingScreen/LoadingScreen';
 
 const DynamicParticlesSidebar = dynamic(() => import('../components/ParticlesSidebar'), {
   ssr: false

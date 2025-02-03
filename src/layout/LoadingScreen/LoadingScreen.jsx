@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import styles from '@/styles/LoadingScreen.module.scss';
+import styles from '@/layout/LoadingScreen/LoadingScreen.module.scss';
 
 const variants = {
   initial: {
