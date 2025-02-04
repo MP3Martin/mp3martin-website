@@ -52,12 +52,12 @@ export default function Heading () {
       <div className="relative z-[1]">
         <div className="w-full -mt-5 md:mt-1 mb-7 flex flex-row">
           <div className="w-fit">
-            <p className="text-5xl text-[12vw] sm:text-[11vw] md:text-[9vw] lg:text-8xl
-      whitespace-nowrap text-left font-extrabold text-fade ">
+            <div className="text-5xl text-[12vw] sm:text-[11vw] md:text-[9vw] lg:text-8xl
+      whitespace-nowrap text-left font-extrabold text-fade">
               <span className="text-[0.5em]">Hi,</span><br />
-              <span className="leading-tight">I&apos;m MP3Martin<br /></span>
+              <h1 className="leading-tight">I&apos;m MP3Martin</h1>
               <span className="text-[0.5em] block text-right">and this is my portfolio</span>
-            </p>
+            </div>
           </div>
           <div
             className="w-full flex flex-row justify-center items-center mr-[-2vw] min-[1300px]:mr-[-4vw] min-[1400px]:mr-[-6vw]">
