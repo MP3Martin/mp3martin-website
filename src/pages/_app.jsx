@@ -24,7 +24,7 @@ const Theme = ({
   router
 }) => {
   return (
-    <HeroUIProvider navigate={router.push}>
+    <HeroUIProvider navigate={router.push} reducedMotion="never">
       <NextThemesProvider
         attribute="class"
         defaultTheme="dark"

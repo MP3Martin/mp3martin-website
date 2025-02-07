@@ -38,4 +38,7 @@ module.exports = {
       }
     }
   )],
+  blocklist: [
+    'motion-reduce:transition-none'
+  ]
 };
