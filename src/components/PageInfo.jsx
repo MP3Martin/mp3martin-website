@@ -7,11 +7,6 @@ export default function PageInfo ({
 }) {
   return <Head>
     <title>{title}</title>
-    <meta key="title" content={title} property="og:title" />
-    <meta content={description} property="og:description" />
-    <meta content={description} name="description" />
-
-    {/* HTML Meta Tags */}
     <meta content={description} name="description" />
 
     {/* Facebook Meta Tags */}
