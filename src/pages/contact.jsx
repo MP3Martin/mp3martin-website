@@ -92,7 +92,6 @@ export default function Contact () {
             business@mp3martin.xyz
           </Snippet>
         </MyTooltip>
-        <br />
         <MyTooltip color="secondary" content="Contact on discord" placement="bottom">
           <Button as={ButtonableLink} className="hover:scale-105 transition-transform text-medium px-3 h-fit"
                   color="secondary" endContent={<IconExternalLink />} href="https://discord.mp3martin.xyz/"
