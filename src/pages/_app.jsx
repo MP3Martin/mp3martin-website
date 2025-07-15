@@ -1,7 +1,6 @@
 import { HeroUIProvider } from '@heroui/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import '@/styles/globals.scss';
 import { AnimatePresence } from 'framer-motion';
@@ -65,9 +64,7 @@ export default function App ({
 
   return (
     <>
-      <Head>
-        <GoogleAnalytics gaId="G-YQNSZ8R81R" />
-      </Head>
+      <GoogleAnalytics gaId="G-YQNSZ8R81R" />
       <Theme router={router}>
         <AnimatePresence initial>
           <DefaultLayout>
