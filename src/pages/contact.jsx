@@ -4,7 +4,7 @@ import {
   IconBrandDiscord,
   IconBrandGithub,
   IconBrandInstagram,
-  IconBrandReddit,
+  IconBrandLinkedin,
   IconBrandSteam,
   IconBrandYoutube,
   IconCheck,
@@ -29,6 +29,11 @@ const links = [
     icon: IconBrandGithub
   },
   {
+    name: 'LinkedIn',
+    link: 'https://linkedin.com/in/martinpitas/',
+    icon: IconBrandLinkedin
+  },
+  {
     name: 'YouTube',
     link: 'https://www.youtube.com/@MP3Martin/',
     icon: IconBrandYoutube
@@ -37,11 +42,6 @@ const links = [
     name: 'Instagram',
     link: 'https://www.instagram.com/mp3martin/',
     icon: IconBrandInstagram
-  },
-  {
-    name: 'Reddit',
-    link: 'https://www.reddit.com/user/MP3_MP3/',
-    icon: IconBrandReddit
   },
   {
     name: 'Steam',
