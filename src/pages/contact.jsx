@@ -20,7 +20,7 @@ import PageInfo from '@/components/PageInfo';
 import MyTooltip from '@/components/MyTooltip';
 import EasterEgg from '@/components/contact/EasterEgg';
 import ButtonableLink from '@/components/ButtonableLink';
-import ButtonScaleEffect from '@/components/contact/ButtonScaleEffect';
+import useContactButtonEffect from '@/hooks/useContactButtonEffect';
 
 const links = [
   {
@@ -61,21 +61,22 @@ export default function Contact () {
     setIsTouch(primaryInput === 'touch');
   }, []);
 
+  useContactButtonEffect(!isTouch);
+
   return (
     <>
       <PageInfo description="How to contact me" title="Contact - MP3Martin" />
       <PageTitle>Contact</PageTitle>
-      {!isTouch && <ButtonScaleEffect />}
 
       <p className="text-lg mb-4 max-w-96">
         Here, you can find links to my social media and ways to contact me.
       </p>
-      <div className="flex flex-col w-fit">
-        <MyTooltip color="primary" content="Copy email" placement="top">
+      <div className="flex flex-col w-fit max-[400px]:mx-auto">
+        <MyTooltip color="primary" content="Copy email" isDisabled={isTouch} placement="top">
           <Snippet disableTooltip as={Button} checkIcon={<IconCheck />}
-                   className="mb-4 hover:scale-105 transition-transform"
+                   className="w-full mb-4 hover:scale-105 transition-transform"
                    classNames={{
-                     pre: 'flex flex-row items-center gap-2 text-sm min-[330px]:text-medium font-[inherit]',
+                     pre: 'flex flex-row items-center gap-2 text-sm min-[350px]:text-medium font-[inherit]',
                      copyButton: 'transition-shadow pointer-events-none'
                    }} color="primary" copyButtonProps={{
                      tabIndex: -1,
@@ -93,7 +94,7 @@ export default function Contact () {
           </Snippet>
         </MyTooltip>
         <MyTooltip color="secondary" content="Contact on discord" placement="bottom">
-          <Button as={ButtonableLink} className="hover:scale-105 transition-transform text-medium px-3 h-fit"
+          <Button as={ButtonableLink} className="w-full hover:scale-105 transition-transform text-medium px-3 h-fit"
                   color="secondary" endContent={<IconExternalLink />} href="https://discord.mp3martin.xyz/"
                   startContent={<IconBrandDiscord size={iconSize} />}
                   target="_blank" variant="shadow">
@@ -108,7 +109,7 @@ export default function Contact () {
           const Icon = link.icon;
 
           return (<Button key={link.name} as={ButtonableLink}
-                          className={clsx('border-[#DD6600] text-medium pl-2 pr-3 h-fit text-default-foreground w-full', isTouch ? 'hover:scale-105 transition-transform' : 'scale-button')}
+                          className={clsx('border-[#DD6600] text-medium pl-2 pr-3 h-fit text-default-foreground w-full', isTouch ? 'hover:scale-105 transition-transform' : 'contact-button')}
                           href={link.link}
                           target="_blank" variant="bordered">
             <div className="w-full flex flex-row items-center">
@@ -121,7 +122,7 @@ export default function Contact () {
           </Button>);
         })}
       </div>
-      <EasterEgg className="mt-1"/>
+      <EasterEgg className="mt-1" />
     </>
   );
 }

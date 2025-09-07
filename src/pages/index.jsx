@@ -7,7 +7,7 @@ import Heading from '@/components/index/Heading';
 import Skills from '@/components/index/Skills';
 import Links from '@/components/index/Links';
 
-const MotionDivider = motion(Divider);
+const MotionDivider = motion.create(Divider);
 
 export default function IndexPage () {
   return (

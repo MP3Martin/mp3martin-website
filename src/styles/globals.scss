@@ -53,7 +53,10 @@ div:has(div > div > .popover-fix-z-index) {
   }
 }
 
-.scale-button {
-  transition: transform 0.1s ease-out;
+.contact-button {
   will-change: transform;
+
+  &:hover {
+    color: white;
+  }
 }
