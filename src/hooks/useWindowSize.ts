@@ -1,6 +1,6 @@
 /* Original code thanks to Soumya Ranjan Padhy @ https://dev.to/soumyarian/usescreensize-a-custom-react-hook-for-dynamic-screen-size-detection-5e59 */
 
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface WindowSize {
   breakpoint: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '';
@@ -13,7 +13,7 @@ export const useWindowSize = () => {
     width: 0
   });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const handleResize = () => {
       let breakpoint: WindowSize['breakpoint'] = '';
       const width = window.innerWidth;

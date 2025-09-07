@@ -39,7 +39,7 @@ const BuildPassing = () => {
       transition={{ duration: 0.3 }}
     >
       <Image alt="Build passing badge" className="animate-[levitate_4s_ease-in-out_infinite_alternate-reverse] pointer-events-none
-            drop-shadow-xl aspect-square max-md:hidden w-[150px] min-[850px]:w-[200px] min-[1120px]:w-[300px] min-[1300px]:w-[350px] min-[1400px]:w-[400px]"
+            drop-shadow-xl aspect-square max-md:hidden w-[150px] min-[890px]:w-[200px] min-[1120px]:w-[300px] min-[1300px]:w-[350px] min-[1400px]:w-[400px]"
              src={buildPassing} width={300}
              onLoad={() => setIsLoaded(true)} />
     </motion.div>
@@ -52,10 +52,10 @@ export default function Heading () {
       <div className="relative z-[1]">
         <div className="w-full -mt-5 md:mt-1 mb-7 flex flex-row">
           <div className="w-fit">
-            <div className="text-5xl text-[12vw] sm:text-[11vw] md:text-[9vw] lg:text-8xl
+            <div className="leading-[1] text-[11.7vw] min-[300.5px]:text-[11.3vw] md:text-[9vw] lg:text-8xl
       whitespace-nowrap text-left font-extrabold text-fade">
               <span className="text-[0.5em]">Hi,</span><br />
-              <h1 className="leading-tight">I&apos;m MP3Martin</h1>
+              <h1 className="leading-tight tracking-[-0.005em]">I&apos;m Martin Pitaš</h1>
               <span className="text-[0.5em] block text-right">and this is my portfolio</span>
             </div>
           </div>
