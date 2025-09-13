@@ -12,6 +12,6 @@ const ButtonableLink = forwardRef(({
   );
 });
 
-ButtonableLink.displayName = 'CustomTab';
+ButtonableLink.displayName = 'ButtonableLink';
 
 export default ButtonableLink;
