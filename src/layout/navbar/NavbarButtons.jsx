@@ -24,7 +24,7 @@ const SocialsButton = ({
 };
 const socials = [
   ['GitHub', 'https://github.com/MP3Martin/', IconBrandGithub],
-  ['YouTube', 'https://www.youtube.com/@MP3Martin/', IconBrandYoutube],
+  ['LinkedIn', 'https://linkedin.com/in/martinpitas/', IconBrandYoutube],
   ['Instagram', 'https://www.instagram.com/mp3martin/', IconBrandInstagram]
 ];
 
