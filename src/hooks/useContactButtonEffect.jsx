@@ -18,6 +18,8 @@ export default function useContactButtonEffect (enabled) {
     const dimBackgroundColor = 'rgba(221, 102, 0, 0.3)';
     const buttonBaseTransition = 'transform 0.1s ease-out, ';
 
+    let previousClosestButton = null;
+
     const calculateDistance = (rect, x, y) => {
       const distanceX = Math.max(rect.left - x, x - rect.right, 0);
       const distanceY = Math.max(rect.top - y, y - rect.bottom, 0);
@@ -31,6 +33,7 @@ export default function useContactButtonEffect (enabled) {
         button.style.backgroundColor = '';
         button.style.transition = buttonBaseTransition;
       });
+      previousClosestButton = null;
     };
 
     const handleMouseMove = (e) => {
@@ -70,6 +73,8 @@ export default function useContactButtonEffect (enabled) {
         mouseY >= containerRect.top - verticalBuffer &&
         mouseY <= containerRect.bottom + verticalBuffer;
 
+      const isSwitchingButtons = previousClosestButton !== null;
+
       // --- Step 3: Apply styles to all buttons ---
       buttonData.forEach(data => {
         const {
@@ -94,14 +99,26 @@ export default function useContactButtonEffect (enabled) {
         button.style.transform = `scale(${scale})`;
 
         // Apply background color and its specific transition
-        if (data === closestButtonData && isInsideContainer) {
-          button.style.transition = buttonBaseTransition + 'background-color 0.08s ease-in';
+        if (data.button === closestButtonData.button && isInsideContainer) {
+          // If switching between buttons, make the fade-in instant
+          if (isSwitchingButtons) {
+            button.style.transition = buttonBaseTransition + 'background-color 0s';
+          } else {
+            button.style.transition = buttonBaseTransition + 'background-color 0.08s ease-in';
+          }
           button.style.backgroundColor = dimBackgroundColor;
         } else {
-          button.style.transition = buttonBaseTransition + 'background-color 0.5s ease-out';
+          button.style.transition = buttonBaseTransition + 'background-color 0.4s ease-out';
           button.style.backgroundColor = '';
         }
       });
+
+      // Update the previous closest button reference
+      if (isInsideContainer) {
+        previousClosestButton = closestButtonData.button;
+      } else {
+        previousClosestButton = null;
+      }
     };
 
     document.addEventListener('mousemove', handleMouseMove);
