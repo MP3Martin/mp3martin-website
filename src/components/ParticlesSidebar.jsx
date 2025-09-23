@@ -9,7 +9,7 @@ import { useWindowSize } from '@/hooks/useWindowSize';
 const MyParticles = () => {
   return (<>
     <Particles
-      className="absolute z-[-1] right-0 top-0 max-[700px]:w-[35vw] max-[900px]:w-[40vw] w-[55vw] opacity-70 transition-width h-full max-w-4xl [mask-image:linear-gradient(to_right,_rgba(0,_0,_0,_0)_0px,_rgba(0,_0,_0,_1)_300px)]"
+      className="absolute z-[-1] right-0 top-0 max-[700px]:w-[35vw] max-[900px]:w-[45vw] w-[55vw] opacity-70 transition-width h-full [mask-image:linear-gradient(to_right,_rgba(0,_0,_0,_0)_0px,_rgba(0,_0,_0,_1)_300px)]"
       options={{
         particles: {
           number: {
