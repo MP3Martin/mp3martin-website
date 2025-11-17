@@ -7,10 +7,9 @@ import {
 } from '@heroui/react';
 import NextLink from 'next/link';
 import React, { memo, useState } from 'react';
-import Image from 'next/image';
+import clsx from 'clsx';
 
 import { useWindowSize } from '@/hooks/useWindowSize';
-import { siteConfig } from '@/config/consts/site';
 import { MobileNavbarButtons, NavbarButtons } from '@/layout/navbar/NavbarButtons';
 import ToggleIcon from '@/components/icons/ToggleIcon';
 import NavbarTabs from '@/layout/navbar/NavbarTabs';
@@ -20,8 +19,6 @@ export const iconSize = 35;
 const NavbarBrand = () => {
   return (<HeroUINavbarBrand className="gap-3 max-w-fit">
     <NextLink className="flex justify-start items-center gap-1" href="/">
-      <Image alt="MP3Martin logo" className="rounded-lg" height={iconSize}
-             src={siteConfig.basePath + '/images/favicon.png'} width={iconSize} />
       <p className="font-bold">MP3Martin</p>
     </NextLink>
   </HeroUINavbarBrand>);
@@ -47,7 +44,7 @@ const NavBarImpl = memo(({
                   height={isMobile ? '3.7rem' : '3.2rem'}
                   isMenuOpen={isMenuOpen} maxWidth="full" position="sticky" onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent className="max-sm:-ml-2" justify="start">
-        <Button isIconOnly className="sm:hidden hover:scale-110"
+        <Button isIconOnly className={clsx('hover:scale-110', !isMobile && 'hidden')}
                 data-open={isMenuOpen} size="md"
                 style={{
                   width: iconSize + 10,
@@ -89,8 +86,8 @@ NavBarImpl.displayName = 'NavBarImpl';
 
 export default function NavBar () {
   const windowSize = useWindowSize();
-  const isMobile = ['xxs', 'xs'].includes(windowSize.breakpoint);
-  const showMobileNavbarButtons = windowSize.width < 360;
+  const isMobile = windowSize.width < 590;
+  const showMobileNavbarButtons = windowSize.width < 330;
 
   return (
     <NavBarImpl isMobile={isMobile} showMobileNavbarButtons={showMobileNavbarButtons} />
