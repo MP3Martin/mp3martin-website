@@ -52,7 +52,7 @@ export default function App ({
     setStartFadeIn(true);
   }, [setStartFadeIn]);
 
-  if (router.pathname.endsWith('_error')) {
+  if (router.pathname.endsWith('_error') || router.pathname === '/404') {
     return (
       <>
         <Theme router={router}>
