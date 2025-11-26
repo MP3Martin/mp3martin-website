@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 import useIsFirstRender from '@/hooks/useIsFirstRender';
 
@@ -46,7 +46,7 @@ export default function PageFadeInAnimationWrapper ({
 
   return (
     <>
-      <motion.div
+      <m.div
         key={router.route}
         ref={motionDivRef}
         animate={animationState}
@@ -68,7 +68,7 @@ export default function PageFadeInAnimationWrapper ({
         onAnimationStart={firstFadeInStarted}
       >
         {children}
-      </motion.div>
+      </m.div>
     </>
   );
 }

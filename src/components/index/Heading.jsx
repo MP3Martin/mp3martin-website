@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { cubicBezier, motion } from 'framer-motion';
+import { cubicBezier, m } from 'framer-motion';
 import { IconCursorText } from '@tabler/icons-react';
 import Image from 'next/image';
 
@@ -10,7 +10,7 @@ const easeOutCubic = (x) => {
 };
 
 const BlinkingCursor = () => {
-  return <motion.span
+  return <m.span
     animate={{ opacity: 1 }}
     className="inline-block select-none align-middle my-0 ml-[-0.85em] mr-[-10px]"
     initial={{ opacity: 0.05 }}
@@ -25,14 +25,14 @@ const BlinkingCursor = () => {
     }}
   >
     <IconCursorText className="size-[1.4em] text-zinc-200 translate-y-[-0.09em]" />
-  </motion.span>;
+  </m.span>;
 };
 
 const BuildPassing = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <motion.div
+    <m.div
       animate={{
         opacity: isLoaded ? 1 : 0
       }}
@@ -42,7 +42,7 @@ const BuildPassing = () => {
             drop-shadow-xl aspect-square max-md:hidden w-[150px] min-[890px]:w-[200px] min-[1120px]:w-[300px] min-[1300px]:w-[350px] min-[1400px]:w-[400px]"
              src={buildPassing} width={300}
              onLoad={() => setIsLoaded(true)} />
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -61,7 +61,7 @@ export default function Heading () {
           </div>
           <div
             className="w-full flex flex-row justify-center items-center mr-[-2vw] min-[1300px]:mr-[-4vw] min-[1400px]:mr-[-6vw]">
-            <motion.div
+            <m.div
               animate={{
                 opacity: 1,
                 y: 0
@@ -81,7 +81,7 @@ export default function Heading () {
               <div className="flex flex-col justify-center h-0 translate-y-12">
                 <BuildPassing />
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </div>
 
@@ -95,7 +95,7 @@ export default function Heading () {
         </p>
       </div>
 
-      <motion.div
+      <m.div
         animate={{
           opacity: 1,
           y: 0
@@ -113,7 +113,7 @@ export default function Heading () {
       >
         <div
           className="absolute left-0 right-0 z-0 m-auto h-16 bg-gradient-to-t from-purple-400 to-purple-600 blur-[100px] opacity-50" />
-      </motion.div>
+      </m.div>
     </>
   );
 }

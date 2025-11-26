@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 
 import styles from '@/layout/LoadingScreen/LoadingScreen.module.scss';
 
@@ -37,7 +37,7 @@ export default function LoadingScreen ({ loadingScreenFinished }) {
         `}
       </style>}
       <AnimatePresence onExitComplete={() => { setIsLoadingFinished(true); }}>
-        {isLoading && <motion.div
+        {isLoading && <m.div
           className="fixed z-[999] inset-0 bg-background"
           exit="hidden"
           initial="initial"
@@ -58,7 +58,7 @@ export default function LoadingScreen ({ loadingScreenFinished }) {
               </div>
             </div>
           </div>
-        </motion.div>}
+        </m.div>}
       </AnimatePresence>
     </>
   )

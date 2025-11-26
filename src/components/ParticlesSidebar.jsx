@@ -1,8 +1,8 @@
 import { memo, useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
-import { router } from 'next/client';
+import { useRouter } from 'next/router';
 
 import { useWindowSize } from '@/hooks/useWindowSize';
 
@@ -107,7 +107,7 @@ const AnimatedWrapper = memo(({ isVisible }) => {
   return (
     <>
       <AnimatePresence>
-        {isVisible && <motion.div
+        {isVisible && <m.div
           animate={{ opacity: 1 }}
           exit={{
             opacity: 0,
@@ -116,7 +116,7 @@ const AnimatedWrapper = memo(({ isVisible }) => {
           initial={{ opacity: 0 }}
           transition={{ duration: 0.4 }}>
           <MyParticles />
-        </motion.div>}
+        </m.div>}
       </AnimatePresence>
     </>
   );
@@ -125,6 +125,7 @@ const AnimatedWrapper = memo(({ isVisible }) => {
 AnimatedWrapper.displayName = 'AnimatedWrapper';
 
 export default function ParticlesSidebar () {
+  const router = useRouter();
   const [init, setInit] = useState(false);
   const [correctPage, setCorrectPage] = useState(false);
   const [correctWindowSize, setCorrectWindowSize] = useState(false);
@@ -139,25 +140,17 @@ export default function ParticlesSidebar () {
   }, []);
 
   useEffect(() => {
-    const routeChangeComplete = () => {
-      if (router.pathname === '/contact') {
-        setCorrectPage(true);
-      } else {
-        setCorrectPage(false);
-      }
-    };
-    const routeChangeStart = () => {
-      setCorrectPage(false);
-    };
+    const routeChangeStart = () => setCorrectPage(false);
+    const routeChangeComplete = () => setCorrectPage(router.pathname === '/contact');
 
-    router.events.on('routeChangeComplete', routeChangeComplete);
     router.events.on('routeChangeStart', routeChangeStart);
+    router.events.on('routeChangeComplete', routeChangeComplete);
 
     routeChangeComplete();
 
     return () => {
-      router.events.off('routeChangeComplete', routeChangeComplete);
       router.events.off('routeChangeStart', routeChangeStart);
+      router.events.off('routeChangeComplete', routeChangeComplete);
     };
   }, [router]);
 

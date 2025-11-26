@@ -1,13 +1,13 @@
 import React from 'react';
 import { Divider } from '@heroui/react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 import PageInfo from '@/components/PageInfo';
 import Heading from '@/components/index/Heading';
 import Skills from '@/components/index/Skills';
 import Links from '@/components/index/Links';
 
-const MotionDivider = motion.create(Divider);
+const MotionDivider = m.create(Divider);
 
 export default function IndexPage () {
   return (

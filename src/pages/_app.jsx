@@ -3,7 +3,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { useRouter } from 'next/router';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import '@/styles/globals.scss';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, domAnimation, LazyMotion } from 'framer-motion';
 import React, { useCallback, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 
@@ -14,6 +14,7 @@ import { useHandleScrollOrigin } from '@/hooks/useHandleScrollOrigin';
 import PageFadeInAnimationWrapper from '@/layout/PageFadeInAnimationWrapper';
 import LoadingScreen from '@/layout/LoadingScreen/LoadingScreen';
 
+// noinspection JSCheckFunctionSignatures
 const DynamicParticlesSidebar = dynamic(() => import('../components/ParticlesSidebar'), {
   ssr: false
 });
@@ -66,15 +67,17 @@ export default function App ({
     <>
       <GoogleAnalytics gaId="G-YQNSZ8R81R" />
       <Theme router={router}>
-        <AnimatePresence initial>
-          <DefaultLayout>
-            <DynamicParticlesSidebar />
-            <LoadingScreen loadingScreenFinished={loadingScreenFinished} />
-            <PageFadeInAnimationWrapper motionDivRef={motionDivRef} router={router} startFadeIn={startFadeIn}>
-              <Component {...pageProps} />
-            </PageFadeInAnimationWrapper>
-          </DefaultLayout>
-        </AnimatePresence>
+        <LazyMotion features={domAnimation}>
+          <AnimatePresence initial>
+            <DefaultLayout>
+              <DynamicParticlesSidebar />
+              <LoadingScreen loadingScreenFinished={loadingScreenFinished} />
+              <PageFadeInAnimationWrapper motionDivRef={motionDivRef} router={router} startFadeIn={startFadeIn}>
+                <Component {...pageProps} />
+              </PageFadeInAnimationWrapper>
+            </DefaultLayout>
+          </AnimatePresence>
+        </LazyMotion>
       </Theme>
     </>
   );
