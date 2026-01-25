@@ -3,7 +3,6 @@ import { Button, Divider as HeroUIDivider, Snippet } from '@heroui/react';
 import {
   IconBrandDiscord,
   IconBrandGithub,
-  IconBrandInstagram,
   IconBrandLinkedin,
   IconBrandSteam,
   IconBrandYoutube,
@@ -37,11 +36,6 @@ const links = [
     name: 'YouTube',
     link: 'https://www.youtube.com/@MP3Martin/',
     icon: IconBrandYoutube
-  },
-  {
-    name: 'Instagram',
-    link: 'https://www.instagram.com/mp3martin/',
-    icon: IconBrandInstagram
   },
   {
     name: 'Steam',
