@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Link, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
-import { IconBrandGithub, IconBrandLinkedin, IconCaretDown, IconSocial } from '@tabler/icons-react';
+import { IconBrandGithub, IconBrandLinkedin, IconBrandYoutube, IconCaretDown, IconSocial } from '@tabler/icons-react';
 
 import MyTooltip from '@/components/MyTooltip';
 
@@ -24,6 +24,7 @@ const SocialsButton = ({
 };
 const socials = [
   ['GitHub', 'https://github.com/MP3Martin/', IconBrandGithub],
+  ['YouTube', 'https://www.youtube.com/@MP3Martin/', IconBrandYoutube],
   ['LinkedIn', 'https://linkedin.com/in/martinpitas/', IconBrandLinkedin]
 ];
 
