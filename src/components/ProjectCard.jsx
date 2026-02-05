@@ -25,7 +25,7 @@ export default function ProjectCard ({
             alt={`Image of project called "${name}"`}
             className="object-cover shadow-md rounded-xl aspect-[3/4] w-full !h-[initial]"
             draggable={false}
-            fetchpriority="low"
+            fetchPriority="low"
             src={image.src}
           />
         </CardBody>

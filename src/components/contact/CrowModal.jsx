@@ -20,7 +20,7 @@ export default function CrowModal ({
                 alt="Crow"
                 className="shadow-md rounded-xl w-full !h-[initial]"
                 draggable={false}
-                fetchpriority="low"
+                fetchPriority="low"
                 src={crow.src}
               />
               <p className="text-tiny">Christine Matthews / Carrion Crow (Corvus corone) / <Link
